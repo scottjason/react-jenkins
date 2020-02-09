@@ -1,28 +1,17 @@
-#!groovy
-
 pipeline {
-    agent {
-        docker {
-            image 'node:10.19.0-slim'
-            args '-p 3000:3000'
-        }
-    }
-    environment {
-        CI = 'true'
-    }
+    agent { label 'dockerserver' } // if you don't have other steps, 'any' agent works
     stages {
-       stage('Build Docker'){
-            steps {
-              sh './dockerBuild.sh'
+        stage('Front-end') {
+            agent {
+              docker {
+                label 'dockerserver'  // both label and image
+                image 'node:10.19.0-slim'
+                args '-p 3000:3000'
+              }
             }
-       }
-        stage('Build App') {
             steps {
                 sh 'npm install'
             }
         }
     }
 }
-
-
-
