@@ -1,17 +1,13 @@
 pipeline {
-    agent { label 'dockerserver' } // if you don't have other steps, 'any' agent works
+    agent { dockerfile true }
     stages {
-        stage('Front-end') {
-            agent {
-              docker {
-                label 'dockerserver'  // both label and image
-                image 'node:10.19.0-slim'
-                args '-p 3000:3000'
-              }
-            }
+        stage('Build') {
             steps {
                 sh 'npm install'
             }
         }
     }
 }
+
+
+
