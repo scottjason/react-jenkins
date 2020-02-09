@@ -4,7 +4,7 @@ pipeline {
     agent {
         docker {
             image 'node:10.19.0-slim'
-            args '-p 3000:3000'
+            args '-p 3000:3000 --privileged'
         }
     }
     environment {
