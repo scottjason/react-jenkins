@@ -12,7 +12,9 @@ pipeline {
     }
     stages {
        stage('Build Docker'){
-          sh './dockerBuild.sh'
+            steps {
+              sh './dockerBuild.sh'
+            }
        }
         stage('Build App') {
             steps {
