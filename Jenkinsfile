@@ -1,3 +1,5 @@
+#!groovy
+
 pipeline {
     agent {
         docker {
@@ -9,7 +11,10 @@ pipeline {
         CI = 'true'
     }
     stages {
-        stage('Build') {
+       stage('Build Docker'){
+          sh './dockerBuild.sh'
+       }
+        stage('Build App') {
             steps {
                 sh 'npm install'
             }
